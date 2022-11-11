@@ -1,11 +1,15 @@
 const express = require('express')
 const app = express()
 
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
+require('dotenv/config')
 
-app.get('/', (req,res) => {
-    res.send("hello")
+
+mongoose.connect(process.env.DB_CONNECT, () => {
+    console.log('DB is connected...')
 })
 
 app.listen(3000, () => {
-    console.log("up and running...")
+    console.log('Server is running...')
 })
