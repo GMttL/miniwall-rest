@@ -6,6 +6,15 @@ const bodyParser = require('body-parser')
 require('dotenv/config')
 
 
+app.use(bodyParser.json())
+
+const authRoute = require('./routes/auth')
+
+// Middleware
+app.use('/api/user', authRoute)
+
+
+
 mongoose.connect(process.env.DB_CONNECT, () => {
     console.log('DB is connected...')
 })
