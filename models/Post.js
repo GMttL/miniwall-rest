@@ -19,12 +19,16 @@ const postSchema = mongoose.Schema({
         type: Date,
         default: Date.now()
     },
+    text: {
+        type: String,
+        required: true,
+    },
     likes: {
         type: [String]
     },
     comments: {
         type: [{
-            owner: String,
+            owner: {type: String, required: true},
             timestamp: {type: Date, default: Date.now()},
             text: {type: String, max: 1024}     // seems big enough for a comment
         }]

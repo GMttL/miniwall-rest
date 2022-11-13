@@ -18,10 +18,11 @@ router.post('/register', async(req,res) => {
     }
     
     // Validation 2: Check user exists
-    const userExists = await User.findOne({email:req.body.email})
-    if (userExists) {
+    const emailInUse = await User.findOne({email:req.body.email})
+    if (emailInUse || emailInUse.username === req.body.username) { // making sure the username is unique as well
         return res.status(400).send({message: 'User already exists'})
     }
+
 
     // HASH PASSWORDS
     const salt = await bcryptjs.genSalt(5)
