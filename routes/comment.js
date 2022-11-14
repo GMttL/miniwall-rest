@@ -8,7 +8,7 @@ const Post = require('../models/Post')
 const User = require('../models/User')
 
 
-// POST (Create data)
+// POST COMMENT
 router.post('/:postId', verifyToken, async(req,res) => {
     
      // Validation 1: User Input

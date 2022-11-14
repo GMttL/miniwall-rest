@@ -49,7 +49,7 @@ router.get('/', verifyToken, async(req,res) => {
     // TODO: Present posts in DESC ORDER by number of likes
     //       If equal number of likes, NEWER POSTS first (CHRONOLOGICAL ORDER)
     try {
-        const getPosts = await Post.find()
+        const getPosts = await Post.find().sort({likes: 'desc', timestamp: 'asc'})
         res.send(getPosts)
     }
     catch (err) {
@@ -95,7 +95,8 @@ router.patch('/:postId', verifyToken, async(req,res) => {
             {$set: {
                 title: req.body.title,
                 description: req.body.description,
-                text: req.body.text
+                text: req.body.text,
+                timestamp: Date.now()
                 }
             })
         res.send(updatePostById)

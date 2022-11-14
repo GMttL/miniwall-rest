@@ -7,7 +7,7 @@ const Post = require('../models/Post')
 const User = require('../models/User')
 
 
-// POST (Create data)
+// POST LIKE
 router.post('/:postId', verifyToken, async(req,res) => {
     
      //Validation: Check User Privileges

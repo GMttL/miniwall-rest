@@ -24,7 +24,7 @@ const loginValidation = (data) => {
     return schemaValidation.validate(data)
 }
 
-// TODO: Post Validation
+
 const postValidation = (data) => {
     const schemaValidation = joi.object({
         title: joi.string().required().min(4).max(144),
@@ -36,7 +36,7 @@ const postValidation = (data) => {
     return schemaValidation.validate(data)
 }
 
-// TODO: Comment Validation
+
 const commentValidation = (data) => {
     const schemaValidation = joi.object({
         text: joi.string().required().max(1024),
