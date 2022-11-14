@@ -43,7 +43,7 @@ router.post('/', verifyToken, async(req,res) => {
     }
 })
 
-// GET 1 READ
+// GET ALL
 router.get('/', verifyToken, async(req,res) => {
 
     // TODO: Present posts in DESC ORDER by number of likes
@@ -57,7 +57,7 @@ router.get('/', verifyToken, async(req,res) => {
     }
 })
 
-// GET 2 READ by ID
+// GET BY ID
 router.get('/:postId', verifyToken, async(req,res) => {
     try {
         const getPosts = await Post.findById(req.params.postId)
@@ -68,7 +68,7 @@ router.get('/:postId', verifyToken, async(req,res) => {
     }
 })
 
-// PATCH 
+// UPDATE 
 router.patch('/:postId', verifyToken, async(req,res) => {
 
      // Validation 1:  User Input

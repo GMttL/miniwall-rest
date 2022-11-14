@@ -11,11 +11,14 @@ app.use(bodyParser.json())
 const authRoute = require('./routes/auth')
 const postRoute = require('./routes/post')
 const commentRoute = require('./routes/comment')
+const likeRoute = require('./routes/like')
+
 
 // Middleware
 app.use('/api/user', authRoute)
 app.use('/api/post', postRoute)
 app.use('/api/comment', commentRoute)
+app.use('/api/like', likeRoute)
 
 
 mongoose.connect(process.env.DB_CONNECT, () => {
