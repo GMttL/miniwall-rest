@@ -9,10 +9,11 @@ require('dotenv/config')
 app.use(bodyParser.json())
 
 const authRoute = require('./routes/auth')
+const postRoute = require('./routes/post')
 
 // Middleware
 app.use('/api/user', authRoute)
-
+app.use('/api/post', postRoute)
 
 
 mongoose.connect(process.env.DB_CONNECT, () => {

@@ -28,7 +28,7 @@ const loginValidation = (data) => {
 const postValidation = (data) => {
     const schemaValidation = joi.object({
         title: joi.string().required().min(4).max(144),
-        owner: joi.string().required().min(6).max(256).email(),
+        owner: joi.string().min(6).max(256),
         description: joi.string().required(),
         text: joi.string().required()
     })

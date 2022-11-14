@@ -9,7 +9,6 @@ const postSchema = mongoose.Schema({
     },
     owner: {
         type: String,
-        required: true
     },
     description: {
         type: String,
