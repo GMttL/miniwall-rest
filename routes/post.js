@@ -30,7 +30,8 @@ router.post('/', verifyToken, async(req,res) => {
         title: req.body.title,
         owner: user.username,
         description: req.body.description,
-        text: req.body.text
+        text: req.body.text,
+        timestamp: Date.now()
     })
 
     // Inserting into DB
@@ -49,7 +50,7 @@ router.get('/', verifyToken, async(req,res) => {
     // TODO: Present posts in DESC ORDER by number of likes
     //       If equal number of likes, NEWER POSTS first (CHRONOLOGICAL ORDER)
     try {
-        const getPosts = await Post.find().sort({likes: 'desc', timestamp: 'asc'})
+        const getPosts = await Post.find().sort({likes: 'desc', timestamp: 'desc'})
         res.send(getPosts)
     }
     catch (err) {
