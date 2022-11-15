@@ -78,9 +78,10 @@ router.patch('/:postId', verifyToken, async(req,res) => {
      }
 
      //Validation 2: Check User Privileges
+     let post
      try {
         const user = await User.findById(req.user._id)
-        const post = await Post.findById(req.params.postId)
+        post = await Post.findById(req.params.postId)
         if (user.username !== post.owner) {
             return res.status(401).send({message: "Unauthorised"})
         }
@@ -93,9 +94,9 @@ router.patch('/:postId', verifyToken, async(req,res) => {
         const updatePostById = await Post.updateOne(
             {_id: req.params.postId},
             {$set: {
-                title: req.body.title,
-                description: req.body.description,
-                text: req.body.text,
+                title: req.body.title ? req.body.title : post.title,
+                description: req.body.description ? req.body.description : post.description,
+                text: req.body.text ? req.body.text : post.text,
                 timestamp: Date.now()
                 }
             })
