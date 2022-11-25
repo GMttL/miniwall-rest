@@ -1,29 +1,6 @@
-const express = require('express')
-const app = express()
+const {createServer} = require('./server')
 
-const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
-require('dotenv/config')
-
-
-app.use(bodyParser.json())
-
-const authRoute = require('./routes/auth')
-const postRoute = require('./routes/post')
-const commentRoute = require('./routes/comment')
-const likeRoute = require('./routes/like')
-
-
-// Middleware
-app.use('/api/user', authRoute)
-app.use('/api/post', postRoute)
-app.use('/api/comment', commentRoute)
-app.use('/api/like', likeRoute)
-
-
-mongoose.connect(process.env.DB_CONNECT, () => {
-    console.log('DB is connected...')
-})
+const app = createServer()
 
 app.listen(3000, () => {
     console.log('Server is running...')
