@@ -1,9 +1,24 @@
 const supertest = require('supertest')
-const {createServer, connectDB, disconnectDB} = require('../server')
+const {MongoMemoryServer} = require('mongodb-memory-server')
+const mongoose = require('mongoose')
+const {createServer, connectDB, disconnectDB} = require('../utils/server')
 const app = createServer()
 
 describe('post', () => {
+    
+    // ----- CONFIG -----
+    beforeAll(async () => {
+        const mongoServer = await MongoMemoryServer.create()
 
+        await mongoose.connect(mongoServer.getUri())
+    })
+
+    afterAll(async () => {
+        await mongoose.disconnect()
+        await mongoose.connection.close()
+    })
+    
+    // ----- TESTS -----
     describe('get posts route', () => {
         
         describe('given the user is not authorised', () => {
@@ -17,9 +32,5 @@ describe('post', () => {
 
 
     })
-    
-    afterAll(async () => {
-        await disconnectDB()
-    })
-    
+
 })

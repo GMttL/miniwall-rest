@@ -5,10 +5,10 @@ const bodyParser = require('body-parser')
 require('dotenv/config')
 
 
-const authRoute = require('./routes/auth')
-const postRoute = require('./routes/post')
-const commentRoute = require('./routes/comment')
-const likeRoute = require('./routes/like')
+const authRoute = require('../routes/auth')
+const postRoute = require('../routes/post')
+const commentRoute = require('../routes/comment')
+const likeRoute = require('../routes/like')
 
 
 const createServer = () => {
@@ -20,8 +20,6 @@ const createServer = () => {
     app.use('/api/post', postRoute)
     app.use('/api/comment', commentRoute)
     app.use('/api/like', likeRoute)
-
-    connectDB()
 
     return app
 }
