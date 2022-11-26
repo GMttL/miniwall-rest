@@ -64,7 +64,7 @@ router.post('/login', async(req,res) => {
      // Validation 3: Password
      const passwordValidation = await bcryptjs.compare(req.body.password, user.password)
      if (!passwordValidation) {
-        return res.status(400).send({message: 'Your credentials do not match our records.'})
+        return res.status(400).send({message: 'Your credentials do not match our records'})
      }
 
      // GENERATE auth token
