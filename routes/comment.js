@@ -44,7 +44,7 @@ router.post('/:postId', verifyToken, async(req,res) => {
                 comments: comment
                 }
             })
-        res.send(updatePostById)
+        res.status(201).send(updatePostById)
     }
     catch(err) {
         res.send({message:err})

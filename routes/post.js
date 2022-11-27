@@ -37,7 +37,7 @@ router.post('/', verifyToken, async(req,res) => {
     // Inserting into DB
     try {
         const postToSave = await postData.save()
-        res.send(postToSave)
+        res.status(201).send(postToSave)
     }
     catch (err) {
         res.send({message:err})

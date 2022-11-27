@@ -6,7 +6,13 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "jest --watchAll --runInBand --verbose"
+    "test": "jest --watchAll --runInBand"
+  },
+  "jest": {
+    "testSequencer": "./utils/testSequencer.js",
+    "verbose": true,
+    "forceExit": true,
+    "maxWorkers": 1
   },
   "author": "",
   "license": "ISC",

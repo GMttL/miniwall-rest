@@ -6,7 +6,7 @@ const {MongoMemoryServer} = require('mongodb-memory-server')
 const {createServer} = require('../utils/server')
 const mongoose = require('mongoose')
 const User = require('../models/User')
-const {Olga, authorisation} = require('../utils/testData/userTestData')
+const {Olga, Nick} = require('../utils/testData/userTestData')
 
 
 const app = createServer()
@@ -23,6 +23,8 @@ describe('User Management\n', () => {
 
         await mongoose.connect(mongoServer.getUri())
 
+        // WARNING: TO BE USED ONLY FOR email, username, etc. (no password) VALIDATIONS
+        // WARNING: ANY LOGIN ATTEMPT WITH THIS USER WILL FAIL AND RETURN A 400
         const user = new User(Olga)
 
         try {
@@ -241,21 +243,16 @@ describe('User Management\n', () => {
 
         describe('VALID\n', () => {
             it('should return a User payload', async () => {
-                    const payload = {
-                        username: "Nick",
-                        email: "nick@cloud.tv",
-                        password: "123456123"
-                    }
-
+                
                     const {body, status} = await supertest(app)
                                 .post(path + '/register')
                                 .set(headersNoAuth)
-                                .send(payload)
+                                .send(Nick)
                     
-                    expect(status).toBe(200)
-                    expect(body.username).toBe(payload.username)
-                    expect(body.email).toBe(payload.email)
-                    expect(body.password !== payload.password).toBe(true)
+                    expect(status).toBe(201)
+                    expect(body.username).toBe(Nick.username)
+                    expect(body.email).toBe(Nick.email)
+                    expect(body.password !== Nick.password).toBe(true)
             })
         })
     })
@@ -299,13 +296,12 @@ describe('User Management\n', () => {
                                 .post(path + '/login')
                                 .set(headersNoAuth)
                                 .send({
-                                    email: "nick@cloud.tv",
-                                    password: "123456123"
+                                    email: Nick.email,
+                                    password: Nick.password
                                 })
                     
                     expect(status).toBe(200)
-                    authorisation['auth-token'] = body['auth-token']
-            })
+            }) 
         })
     })
 
