@@ -12,4 +12,90 @@
 
 </br></br>
 
+# Endpoints
+
+### User Auth
+
+- POST /api/user/register
+- POST /api/user/login
+
+### Posts
+
+- POST /api/post/
+- GET /api/post/
+- GET /api/post/:ID
+- PATCH /api/post/:ID
+- DELETE /api/post/:ID
+
+### Comments
+
+- POST /api/comment/:ID
+
+### Likes
+
+- POST /api/like/:ID
+
+</br></br>
+
 # Example Usage
+
+## User Auth
+
+    POST /api/user/register
+        content-type: application/json
+        {
+            username: "John",
+            email: "john123@email.com",
+            password: "password"
+        }
+
+
+    POST /api/user/login
+        content-type: application/json
+        {
+            email: "john123@email.com",
+            password: "password"
+        }
+
+## Posts
+
+    POST /api/post/
+        content-type: application/json
+        auth-token: token
+        {
+            title: "title",
+            description: "description",
+            text: "text"
+        }
+
+    GET /api/post/
+        auth-token: token
+
+    GET /api/post/:ID
+        auth-token: token
+
+    PATCH /api/post/:ID
+        content-type: application/json
+        auth-token: token
+        {
+            title: "new title", (optional)
+            description: "new description", (optional)
+            text: "new text" (optional)
+        }
+
+    DELETE /api/post/:ID
+        auth-token: token
+
+## Comments
+
+    POST /api/comment/:ID
+        content-type: application/json
+        auth-token: token
+        {
+            text: "comment text"
+        }
+
+## Likes
+
+    POST /api/like/:ID
+        auth-token: token
